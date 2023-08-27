@@ -1,31 +1,46 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { Createcontext } from "./AuthContext";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Createcontext } from "./AppContext";
 
 function Registration() {
-  const {state, Changevalues} = useContext(Createcontext);
+  const [username, setusername] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [profile, setprofile] = useState(null);
+  let mydata = {};
+  const { state, register } = useContext(Createcontext);
+  let navigate = useNavigate();
+  const submitform = (event) => {
+    event.preventDefault();
+    if (username == "" || password == "" || email == "" || profile == null) {
+      alert("Please complete your registration");
+      return
+    } else {
+      mydata = {
+        id: Date.now(),
+        username: username,
+        email: email,
+        password: password,
+        profile: profile
+      };
+      register(mydata);
+      navigate("/login")
+    }
 
-
-  const handle = (event) => {
-
-    Changevalues(event)
-    console.log(state)
+ 
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen">
       <div className=" w-full  max-w-[600px]  max-h-[600px]  h-full mx-auto mt-8 bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6">User Registration</h2>
-        <form>
+        <form onSubmit={submitform}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-          
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Username:
             </label>
             <input
-              onChange={handle}
+              onChange={(event) => setusername(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="username"
               type="text"
@@ -37,7 +52,7 @@ function Registration() {
               Password:
             </label>
             <input
-              onChange={handle}
+              onChange={(event) => setpassword(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="password"
               type="password"
@@ -49,7 +64,7 @@ function Registration() {
               Email:
             </label>
             <input
-              onChange={handle}
+              onChange={(event) => setemail(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="email"
               type="email"
@@ -61,7 +76,7 @@ function Registration() {
               Profile Picture:
             </label>
             <input
-              onChange={handle}
+              onChange={(event) => setprofile(event.target.files[0])}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="profilePicture"
               type="file"

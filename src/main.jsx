@@ -1,48 +1,53 @@
 import React, { Children } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import Posts from "./pages/posts.jsx";
+
 import "./index.css";
-import Editpost from "./pages/editpost.jsx";
-import DetailPost from "./pages/DetailPost.jsx";
+
+
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./pages/login.jsx";
 import { RouterProvider } from "react-router-dom";
 import Registration from "./components/Registration.jsx";
 import Addpost from "./components/Addpost.jsx";
-import Authprovider from "./components/AuthContext.jsx";
-
+import Authprovider from "./components/AppContext.jsx";
+import Search from "./components/Search.jsx";
+import Findjop from "./pages/Findjop.jsx";
+import Detailpage from "./components/Detailpage.jsx";
+import Editpost from "./components/Editpost.jsx";
 const renderpages = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/posts",
-        element: (
-          <>
-            <Posts />
-            <Posts />
-            <Posts />
-            <Posts />
-            <Posts />
-          </>
-        )
-      },
+   
       {
         path: "/edit/:id",
         element: <Editpost />
       },
+  
       {
         path: "/detail/:id",
-        element: <DetailPost />
+        element: <Detailpage />
       },
       {
         path: "/addpost",
         element: <Addpost />
-      },
+      }, 
+      {
    
-    
+        path: "/findjop",
+        element: <Findjop />
+      }, 
+      {
+        index: true,
+        element: <Findjop />
+      }, 
+      {
+     
+        path: "/Editpost/:id",
+        element: <Editpost />
+      }, 
     ]
   },
   {
