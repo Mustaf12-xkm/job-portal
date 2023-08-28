@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Createcontext } from "./AppContext";
-
-// import { FaLocationDot } from "react-icons/fa";
+import { VscLocation } from "react-icons/vsc";
 function Post({posts}) {
   let { state} = useContext(Createcontext);
   return (
     
     <Link to={`/detail/${posts.id}`}  className=" w-full mb-[18px]">
       <div className="shadow-md shadow-gray-200 p-[10px] pb-[30px]">
-        <div className=" flex justify-between items-center ">
+        <div className="  md:flex justify-between items-center vvsm:block ">
           <div className="flex  items-center space-x-2">
-            <div className="user-image max-w-[60px] h-[60px]  ">
+            <div className="user-image max-w-[60px] h-[60px]">
               <img
                 className=" h-full object-cover rounded-[25%]"
                 src={URL.createObjectURL(posts.Auhorprofileimage)}
@@ -37,11 +36,11 @@ function Post({posts}) {
             {" "}
             <div className="flex  flex-col">
               {" "}
-              <span className="  font-semibold  text-[20px]  text-amber-900 ">
-             {posts.location}
+              <span className="flex items-center space-x-4  font-semibold  text-[20px]  text-amber-900 ">
+           <VscLocation/> {posts.location}
               </span>{" "}
               <span className="  font-semibold  text-[15px]  text-amber-700 ">
-            {posts.formattedTimeDifference}
+          posted  {posts.formattedTimeDifference}
               </span>
             </div>
           </div>

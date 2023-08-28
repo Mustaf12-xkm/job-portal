@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Createcontext } from "./AppContext";
 
@@ -10,11 +10,21 @@ function Registration() {
   let mydata = {};
   const { state, register } = useContext(Createcontext);
   let navigate = useNavigate();
-  const submitform = (event) => {
+  // useEffect(
+  //   () => {
+  //     if (state.Auth.newuser) {
+  //       navigate("/login");
+  //     }else{
+  //       console.log('register')
+  //     }
+  //   },
+  //   [state.Auth.newuser]
+  // );
+  const submitform = event => {
     event.preventDefault();
     if (username == "" || password == "" || email == "" || profile == null) {
       alert("Please complete your registration");
-      return
+      return;
     } else {
       mydata = {
         id: Date.now(),
@@ -24,10 +34,8 @@ function Registration() {
         profile: profile
       };
       register(mydata);
-      navigate("/login")
+      navigate("/login");
     }
-
- 
   };
 
   return (
@@ -40,7 +48,7 @@ function Registration() {
               Username:
             </label>
             <input
-              onChange={(event) => setusername(event.target.value)}
+              onChange={event => setusername(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="username"
               type="text"
@@ -52,7 +60,7 @@ function Registration() {
               Password:
             </label>
             <input
-              onChange={(event) => setpassword(event.target.value)}
+              onChange={event => setpassword(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="password"
               type="password"
@@ -64,7 +72,7 @@ function Registration() {
               Email:
             </label>
             <input
-              onChange={(event) => setemail(event.target.value)}
+              onChange={event => setemail(event.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="email"
               type="email"
@@ -76,7 +84,7 @@ function Registration() {
               Profile Picture:
             </label>
             <input
-              onChange={(event) => setprofile(event.target.files[0])}
+              onChange={event => setprofile(event.target.files[0])}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               name="profilePicture"
               type="file"

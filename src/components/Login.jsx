@@ -8,18 +8,20 @@ function Login() {
   const [password, setpassword] = useState("");
 
   let { state, login } = useContext(Createcontext);
-  
-  useEffect(() => {
-    if (state.Auth.IsAuthenticated) {
-  navigate("/")
-      console.log("Login successful!");
-    } else if (state.Auth.Autherror) {
-      alert("Please correct  username and password");
-    }
-   
-  }, [state.Auth]);
 
-  const submitform = (event) => {
+  useEffect(
+    () => {
+      if (state.Auth.IsAuthenticated) {
+        navigate("/");
+        console.log("Login successful!");
+      } else if (state.Auth.Autherror) {
+        alert("Please correct  username and password");
+      }
+    },
+    [state.Auth]
+  );
+
+  const submitform = event => {
     event.preventDefault();
     if (username == "" || password == "") {
       alert("Please  fill username and password");
@@ -27,7 +29,6 @@ function Login() {
     }
 
     login(username, password);
-    
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen">
@@ -42,7 +43,7 @@ function Login() {
               Username:
             </label>
             <input
-              onChange={(e) => setusername(e.target.value)}
+              onChange={e => setusername(e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               id="username"
               type="text"
@@ -57,7 +58,7 @@ function Login() {
               Password:
             </label>
             <input
-              onChange={(e) => setpassword(e.target.value)}
+              onChange={e => setpassword(e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 leading-tight focus:outline-none focus:border-indigo-500"
               id="password"
               type="password"

@@ -1,17 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { isAfter } from "date-fns";
 import Addcomment from "./Addcomment";
 import { Createcontext } from "./AppContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { isAfter } from "date-fns";
+
+import { VscLocation } from "react-icons/vsc";
 function Detailpage() {
-  let { id } = useParams();
   let navigate = useNavigate();
+
+  let { id } = useParams();
+
   let { state, Deletepost, increaseapplicants } = useContext(Createcontext);
   let job = state.posts.find(post => post.id === parseInt(id));
-  let startDate = new Date(job.startDate);
-  let endDate = new Date(job.enddate);
-  console.log(endDate);
-  const isStartDateAfterEndDate = isAfter(startDate, endDate);
+  let startDate = null;
+  let endDate = null;
+  
+  if (job) {
+    startDate = new Date(job.startDate);
+    endDate = new Date(job.enddate);
+  }
+ 
+  const isStartDateAfterEndDate = isAfter(startDate, endDate );
+  console.log("end",endDate ,"start",startDate)
   const handleButtonClick = () => {
     const email = job.Authorgmail;
     const name = job.Author;
@@ -25,7 +35,20 @@ function Detailpage() {
     window.open(mailtoLink);
     increaseapplicants(job.id);
   };
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      window.location.href = "/findjop";
+    };
+
+    window.onbeforeunload = handleBeforeUnload;
+
+    return () => {
+      window.onbeforeunload = null;
+    };
+  }, []);
   return (
+    job && (
     <div>
       <div className=" w-[70%] mx-auto mb-[18px]">
         <div className="shadow-md shadow-gray-200 p-[10px] pb-[30px]">
@@ -53,11 +76,11 @@ function Detailpage() {
             </div>
             <div>
               {" "}<div className="flex  flex-col">
-                {" "}<span className="  font-semibold  text-[20px]  text-amber-900 ">
-                  {job.location}
+                {" "}<span className=" flex items-center space-x-4 font-semibold  text-[20px]  text-amber-900 ">
+                <VscLocation/>  {job.location}
                 </span>{" "}
                 <span className="  font-semibold  text-[15px]  text-amber-700 ">
-                  {job.formattedTimeDifference}
+                 posted {job.formattedTimeDifference}
                 </span>
               </div>
             </div>
@@ -77,13 +100,14 @@ function Detailpage() {
             {job.jopDescription}
           </p>
           <div className="flex justify-between mt-2">
-            
-            {job.applicants? ( <div className=" text-lg text-red-600 font-semibold">
-              Applicants:  {job.applicants}
-              </div>):( <div className=" text-lg text-red-600 font-semibold">
-              Applicants: 0
-              </div>)   }
-             
+            {job.applicants
+              ? <div className=" text-lg text-red-600 font-semibold">
+                  Applicants: {job.applicants}
+                </div>
+              : <div className=" text-lg text-red-600 font-semibold">
+                  Applicants: 0
+                </div>}
+
             {state.Auth.CurrentUser &&
               job.Author === state.Auth.CurrentUser.username &&
               <div className=" flex space-x-2">
@@ -129,8 +153,8 @@ function Detailpage() {
           <Addcomment postId={job.id} />
         </div>
       </div>
-    </div>
-  );
+    </div> 
+  ));
 }
 
 export default Detailpage;

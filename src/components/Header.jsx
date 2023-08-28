@@ -8,8 +8,8 @@ function Header() {
   const { state, dispatch } = useContext(Createcontext);
   return (
     <>
-      <div className="fixed top-0 right-0 left-0 shadow  bg-slate-100  ">
-        <div className="flex justify-between items-center w-[85%] mx-auto h-[5rem] ">
+      <div className="fixed top-0 right-0 left-0 shadow  bg-slate-100   ">
+        <div className="flex justify-between items-center lg:w-[70%] vvsm:w-full mx-auto h-[5rem] px-2 ">
           <div className="logo   text-[20px] uppercase font-semibold">logo</div>
           <ul className="text-[20px] font-medium capitalize space-x-3 flex">
             <Link

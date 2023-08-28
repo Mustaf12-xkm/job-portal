@@ -3,7 +3,7 @@ import Image from "../assets/im.png";
 function Heroimage() {
   return (
     <div className="bg-slate-100">
-    <div className=" mx-auto flex justify-between  w-[90%] items-center">
+    <div className=" mx-auto lg:flex justify-between vsm:block  w-[70%] items-center">
       <div>
         <span className="text-[30px] font-semibold">find your dream job</span>
         <p>
@@ -11,7 +11,7 @@ function Heroimage() {
           best jobs today !
         </p>
       </div>
-      <img src={Image}/>
+      <img className=" lg:w-auto  vsm:w-full" src={Image}/>
     </div>
     </div>
   );

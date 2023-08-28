@@ -27,8 +27,8 @@ const SkeletonItem = () => (
     <div className="flex justify-between mt-2">
       <div className="text-lg text-red-600 font-semibold bg-gray-300 h-6 w-1/4"></div>
       <div className="flex space-x-2">
-        <div className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded bg-gray-300"></div>
-        <div className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded bg-gray-300"></div>
+        <div className=" hover:bg-red-600 text-white font-bold py-2 px-4 rounded bg-gray-300"></div>
+        <div className=" hover:bg-red-600 text-white font-bold py-2 px-4 rounded bg-gray-300"></div>
       </div>
     </div>
     <div className="flex justify-between mt-6 items-center border-b-2 border-[#eae8e8] pb-2">

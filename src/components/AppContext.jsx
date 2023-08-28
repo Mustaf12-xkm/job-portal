@@ -10,7 +10,7 @@ const Authprovider = ({ children }) => {
   const register = (values) => {
     dispatch({
       type: "register",
-      payload: values
+      payload: {  newuser :true, values }
     });
   };
 

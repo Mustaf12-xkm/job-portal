@@ -2,7 +2,8 @@ export const initialState = {
   Auth: {
     IsAuthenticated: false,
     CurrentUser: null,
-    Autherror: false
+    Autherror: false,
+    newuser:false
   },
   users: [],
   posts: [],
@@ -17,7 +18,8 @@ const AuthReducer = (state, action) => {
     case "register":
       return {
         ...state,
-        users: [...state.users, payload]
+        users: [...state.users, payload.values],
+        Auth:{newuser:payload.newuser}
       };
     case "login": {
       return {

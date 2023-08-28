@@ -3,11 +3,14 @@ import { Createcontext } from "./AppContext";
 import Post from "./Post";
 
 
-function Joplist() {
+function Joplist({filtereddata,locationQuery}) {
     let { state } = useContext(Createcontext);
+    
+    const displayPosts =  locationQuery ? filtereddata : state.posts;
+    
   return (
     <div>
-      {state.posts.map((post) => (
+      {displayPosts.map((post) => (
       
         <Post key={post.id} posts={...post} />
       ))}
