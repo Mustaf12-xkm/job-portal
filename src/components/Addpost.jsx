@@ -51,7 +51,6 @@ function Addpost() {
           formatDistanceToNow(new Date(timestamp), { addSuffix: true })
         );
       }, 1000);
-
       return () => {
         clearInterval(intervalId);
       };

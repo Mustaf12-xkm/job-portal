@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { VscLocation } from "react-icons/vsc";
 function Detailpage() {
   let navigate = useNavigate();
+ 
 
   let { id } = useParams();
 

@@ -12,7 +12,7 @@ function Joplist({filtereddata,locationQuery}) {
     <div>
       {displayPosts.map((post) => (
       
-        <Post key={post.id} posts={...post} />
+        <Post key={post.id} posts={post} />
       ))}
     </div>
   );
